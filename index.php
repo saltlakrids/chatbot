@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
 
         <form method="POST" class="chat-input" onsubmit="return checkInputLength()">
             <input type="text" placeholder="Type 'animal' or 'human'..." id="userInput" name="message" required oninput="countCharacters()">
-            <button type="submit">Send</button>
+            <button type="submit">Go</button>
             <div class="counter" id="charCount">0/6 characters</div>
         </form>
     </div>
