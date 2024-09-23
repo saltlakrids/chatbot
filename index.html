@@ -7,7 +7,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to my bot</h1>
-    <p>This is a template</p>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h2>Chatbot</h2>
+        </header>
+
+        <div class="chat-box">
+           
+            <div class="chat user">
+                <div class="message">
+                    <p>What is the weather like today?</p>
+                </div>
+            </div>
+
+            <div class="chat bot">
+                <div class="message">
+                    <p>It is sunny and 25°C outside today.</p>
+                </div>
+            </div>
+
+      
+            <div class="chat user">
+                <div class="message">
+                    <p>Can you tell me about the nearest coffee shops?</p>
+                </div>
+            </div>
+
+            <div class="chat bot">
+                <div class="message">
+                    <p>Sure! Here are a few nearby: Coffee Beans, Java House, and Brew Bar.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message..." id="userInput">
+            <button>Send</button>
+        </div>
+    </div>
 </body>
 </html>
