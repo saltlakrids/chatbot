@@ -144,3 +144,26 @@ body {
 .chat-box::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 }
+
+
+.error {
+    border: 2px solid red;
+    color: red;
+    animation: shake 0.3s;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Styling for character counter */
+.counter {
+    font-size: 0.8rem;
+    color: gray;
+    margin-top: 5px;
+}

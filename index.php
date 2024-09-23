@@ -17,7 +17,6 @@ $animalFacts = [
     "Koalas sleep up to 22 hours a day."
 ];
 
-
 $humanFacts = [
     "Humans are the only species known to blush.",
     "The human brain is more active at night than during the day.",
@@ -34,6 +33,7 @@ $randomFact = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
     $userInput = strtolower(trim($_POST['message'])); 
 
+   
     if ($userInput === 'animal') {
         $randomFact = $animalFacts[array_rand($animalFacts)];
         $botMessage = "Here’s an animal fact for you:";
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
         $randomFact = $humanFacts[array_rand($humanFacts)];
         $botMessage = "Here’s a human fact for you:";
     } else {
-       
+     
         $randomFact = $animalFacts[array_rand($animalFacts)];
         $botMessage = "I didn’t quite catch that, so here’s an animal fact for you:";
     }
@@ -53,14 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
         <header class="chat-header"><h2>Random Fact Bot</h2></header>
         <div class="chat-box">
             
-    
+      
             <div class="chat bot">
                 <div class="message">
                     <p><?php echo $botMessage; ?></p>
                 </div>
             </div>
 
-       
             <?php if (!empty($_POST['message'])): ?>
                 <div class="chat user">
                     <div class="message">
@@ -68,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
                     </div>
                 </div>
                 
-          
                 <div class="chat bot">
                     <div class="message">
                         <p><?php echo $randomFact; ?></p>
@@ -78,11 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
             
         </div>
 
-
-        <form method="POST" class="chat-input">
-            <input type="text" placeholder="Type 'animal' or 'human'..." id="userInput" name="message" required>
+        <form method="POST" class="chat-input" onsubmit="return checkInputLength()">
+            <input type="text" placeholder="Type 'animal' or 'human'..." id="userInput" name="message" required oninput="countCharacters()">
             <button type="submit">Send</button>
+            <div class="counter" id="charCount">0/6 characters</div>
         </form>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
