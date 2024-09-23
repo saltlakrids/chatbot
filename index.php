@@ -21,13 +21,13 @@
             </div>
            
             <div class="chat user">
-                <div class="message"><?php echo isset($_GET['message']) ? $_GET ['message'] : ''; ?>
+                <div class="message"><?php echo isset($_POST['message']) ? $_POST ['message'] : ''; ?>
                     <p></p>
                 </div>
             </div>
         </div>
 
-        <form method="GET" class="chat-input">
+        <form method="POST" class="chat-input">
             <input type="text" placeholder="Type your message..." id="userInput" name="message">
             <button>Send</button>
         </form>
