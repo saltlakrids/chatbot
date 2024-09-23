@@ -13,19 +13,18 @@
         </header>
 
         <div class="chat-box">
+
+        <div class="chat bot">
+                <div class="message">
+                    <p>Hey! What is your request today?</p>
+                </div>
+            </div>
            
             <div class="chat user">
-                <div class="message">
-                    <p>What is the weather like today?</p>
+                <div class="message"><?php echo isset($_GET['message']) ? $_GET ['message'] : ''; ?>
+                    <p></p>
                 </div>
             </div>
-
-            <div class="chat bot">
-                <div class="message">
-                    <p>It is sunny and 25°C outside today.</p>
-                </div>
-            </div>
-
         </div>
 
         <form method="GET" class="chat-input">
