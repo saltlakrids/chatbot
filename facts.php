@@ -1,4 +1,6 @@
 <?php
+session_start(); 
+
 
 $animalFacts = [
     "A group of flamingos is called a 'flamboyance'.",
@@ -16,21 +18,38 @@ $humanFacts = [
     "Your body has about 37.2 trillion cells, constantly working to keep you alive."
 ];
 
-$botMessage = "Would you like to hear an animal fact or a human fact?";
-$randomFact = "";
+if (!isset($_POST['message'])) {
+    $_SESSION['chat'] = [
+        ['bot' => "Would you like to hear an animal fact or a human fact?"]
+    ];
+}
+
+
+function maintainChatHistory() {
+    $_SESSION['chat'] = array_slice($_SESSION['chat'], -6, 6, true);
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
-    $userInput = strtolower(trim($_POST['message']));
+    $userInput = strtolower(trim($_POST['message'])); 
+
+
+    $_SESSION['chat'][] = ['user' => htmlspecialchars($userInput)];
 
     if ($userInput === 'animal') {
         $randomFact = $animalFacts[array_rand($animalFacts)];
-        $botMessage = "Here’s an animal fact for you:";
+        $botMessage = "Here’s an animal fact for you: $randomFact";
     } elseif ($userInput === 'human') {
         $randomFact = $humanFacts[array_rand($humanFacts)];
-        $botMessage = "Here’s a human fact for you:";
+        $botMessage = "Here’s a human fact for you: $randomFact";
     } else {
-
+ 
         $randomFact = $animalFacts[array_rand($animalFacts)];
-        $botMessage = "I didn’t quite catch that, so here’s an animal fact for you:";
+        $botMessage = "I didn’t quite catch that, so here’s an animal fact for you: $randomFact";
     }
+
+
+    $_SESSION['chat'][] = ['bot' => $botMessage];
+
+
+    maintainChatHistory();
 }

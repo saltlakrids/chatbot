@@ -1,3 +1,7 @@
+<?php
+require 'facts.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,34 +10,28 @@
     <title>Random Fact Bot</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
-<?php
-require 'facts.php';
-?>
-
 <body>
     <div class="chat-container">
         <header class="chat-header"><h2>Random Fact Bot</h2></header>
         <div class="chat-box">
-            
-            <div class="chat bot">
-                <div class="message">
-                    <p><?php echo $botMessage; ?></p>
-                </div>
-            </div>
 
-            <?php if (!empty($_POST['message'])): ?>
-                <div class="chat user">
-                    <div class="message">
-                        <p><?php echo htmlspecialchars($_POST['message']); ?></p>
-                    </div>
-                </div>
-                
-                <div class="chat bot">
-                    <div class="message">
-                        <p><?php echo $randomFact; ?></p>
-                    </div>
-                </div>
+         
+            <?php if (!empty($_SESSION['chat'])): ?>
+                <?php foreach ($_SESSION['chat'] as $chat): ?>
+                    <?php if (isset($chat['user'])): ?>
+                        <div class="chat user">
+                            <div class="message">
+                                <p><?php echo $chat['user']; ?></p>
+                            </div>
+                        </div>
+                    <?php elseif (isset($chat['bot'])): ?>
+                        <div class="chat bot">
+                            <div class="message">
+                                <p><?php echo $chat['bot']; ?></p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             <?php endif; ?>
             
         </div>
