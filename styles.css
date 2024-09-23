@@ -86,6 +86,19 @@ body {
     border-bottom-left-radius: 0;
 }
 
+.static {
+    background-color: #e5e5ea;
+    color: #333;
+    border-bottom-left-radius: 0;
+    max-width: 70%;
+    padding: 12px 18px;
+    border-radius: 25px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
 .bot .message:hover {
     transform: scale(1.05);
 }
@@ -117,8 +130,8 @@ body {
     background: linear-gradient(135deg, #2d6a4f, #40916c);
     color: white;
     border: none;
-    border-radius: 15%; 
-    padding: 5px; 
+    border-radius: 15%; /* More square-ish shape */
+    padding: 5px; /* Smaller padding */
     margin-left: 5px; 
     cursor: pointer;
     font-size: 0.85rem; 
