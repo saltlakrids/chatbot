@@ -130,8 +130,8 @@ body {
     background: linear-gradient(135deg, #2d6a4f, #40916c);
     color: white;
     border: none;
-    border-radius: 15%; /* More square-ish shape */
-    padding: 5px; /* Smaller padding */
+    border-radius: 15%; 
+    padding: 5px; 
     margin-left: 5px; 
     cursor: pointer;
     font-size: 0.85rem; 

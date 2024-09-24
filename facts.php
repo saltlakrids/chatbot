@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+session_start();
 
 $animalFacts = [
     "A group of flamingos is called a 'flamboyance'.",
@@ -18,9 +18,7 @@ $humanFacts = [
 ];
 
 if (!isset($_SESSION['chat'])) {
-    $_SESSION['chat'] = [
-        ['bot' => "Would you like to hear an animal fact or a human fact?"]
-    ];
+    $_SESSION['chat'] = [['bot' => "Would you like to hear an animal fact or a human fact?"]];
 }
 
 header('Content-Type: application/json');
@@ -28,28 +26,32 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'history') {
     echo json_encode($_SESSION['chat']);
     exit;
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
-    $userInput = strtolower(trim($_POST['message'])); 
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
+    $userInput = strtolower(trim($_POST['message']));
     $_SESSION['chat'][] = ['user' => htmlspecialchars($userInput)];
 
-    if ($userInput === 'animal') {
-        $randomFact = $animalFacts[array_rand($animalFacts)];
-        $botMessage = "Here’s an animal fact for you: $randomFact";
-    } elseif ($userInput === 'human') {
-        $randomFact = $humanFacts[array_rand($humanFacts)];
-        $botMessage = "Here’s a human fact for you: $randomFact";
-    } else {
-        $randomFact = $animalFacts[array_rand($animalFacts)];
-        $botMessage = "I didn’t quite catch that, so here’s an animal fact for you: $randomFact";
-    }
-
+    $botMessage = handleUserInput($userInput, $animalFacts, $humanFacts);
     $_SESSION['chat'][] = ['bot' => $botMessage];
-    maintainChatHistory();
 
+    maintainChatHistory();
     echo json_encode(['user' => $userInput, 'bot' => $botMessage]);
     exit;
+}
+
+function handleUserInput($input, $animalFacts, $humanFacts) {
+    switch ($input) {
+        case 'animal':
+            return "Here’s an animal fact for you: " . $animalFacts[array_rand($animalFacts)];
+        case 'human':
+            return "Here’s a human fact for you: " . $humanFacts[array_rand($humanFacts)];
+        default:
+            return "I didn’t quite catch that, so here’s an animal fact for you: " . $animalFacts[array_rand($animalFacts)];
+    }
 }
 
 function maintainChatHistory() {
     $_SESSION['chat'] = array_slice($_SESSION['chat'], -6, 6, true);
 }
+?>
